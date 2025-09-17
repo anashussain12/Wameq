@@ -22,9 +22,6 @@ export default async function BlogPostPage({ params }) {
   const imageUrl = cover?.url
     ? `http://localhost:1337${cover.url}`
     : "https://via.placeholder.com/800x400.png?text=No+Image";
-  // const relatedRes = await fetch(
-  //   "http://localhost:1337/api/articles?populate=*&pagination[pageSize]=6"
-  // );
 
 const relatedRes = await fetch(
   `${API_URL}/api/articles?populate=*&pagination[pageSize]=6`
