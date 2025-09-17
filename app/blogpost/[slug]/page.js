@@ -30,8 +30,8 @@ const relatedRes = await fetch(
 
   const relatedData = await relatedRes.json();
   const relatedBlogs = relatedData.data
-    .filter((blog) => blog.id !== id) // exclude current blog
-    .slice(0, 3); // show only 3 related blogs
+    .filter((blog) => blog.id !== id) 
+    .slice(0, 3); 
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
