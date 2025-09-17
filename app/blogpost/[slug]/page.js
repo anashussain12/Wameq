@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default async function BlogPostPage({ params }) {
@@ -57,7 +58,7 @@ export default async function BlogPostPage({ params }) {
         </div>
 
         {/* Cover Image */}
-        <img
+        <Image
           src={imageUrl}
           alt={title}
           className="w-full h-9/12 object-cover rounded-xl shadow mb-8"
@@ -97,7 +98,7 @@ export default async function BlogPostPage({ params }) {
                 key={id}
                 className="bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden flex flex-col"
               >
-                <img
+                <Image
                   src={relatedImg}
                   alt={title}
                   className="h-40 w-full object-cover"

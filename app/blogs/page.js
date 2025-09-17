@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default async function BlogPage() {
@@ -39,7 +40,7 @@ export default async function BlogPage() {
               className="bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden flex flex-col"
             >
               {/* Image */}
-              <img
+              <Image
                 src={imageUrl}
                 alt={title}
                 className="h-48 w-full object-cover"
