@@ -2,7 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default async function BlogPage() {
-  const res = await fetch("http://localhost:1337/api/articles?populate=*");
+  // const res = await fetch("http://localhost:1337/api/articles?populate=*");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/articles?populate=*`);
+
 
   const { data } = await res.json();
 

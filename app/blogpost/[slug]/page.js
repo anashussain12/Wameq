@@ -5,9 +5,13 @@ export default async function BlogPostPage({ params }) {
     const slug = params.slug; // make sure slug exists
 
   // Fetch single article by slug
-  const res = await fetch(
-    `http://localhost:1337/api/articles?filters[slug][$eq]=${params.slug}&populate=*`,
-  );
+  // const res = await fetch(
+  //   `http://localhost:1337/api/articles?filters[slug][$eq]=${params.slug}&populate=*`,
+  // );
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/articles?populate=*`);
+
+
   const { data } = await res.json();
 
   // If no article found
@@ -27,10 +31,15 @@ export default async function BlogPostPage({ params }) {
     : "https://via.placeholder.com/800x400.png?text=No+Image";
 
   // Fetch all articles for related blogs
+  // const relatedRes = await fetch(
+  //   "http://localhost:1337/api/articles?populate=*&pagination[pageSize]=6"
+  // );
+
   const relatedRes = await fetch(
-    "http://localhost:1337/api/articles?populate=*&pagination[pageSize]=6",
-    { cache: "no-store" }
-  );
+  `${process.env.NEXT_PUBLIC_API_URL}/api/articles?populate=*&pagination[pageSize]=6`
+);
+
+
   const relatedData = await relatedRes.json();
   const relatedBlogs = relatedData.data
     .filter((blog) => blog.id !== id) // exclude current blog
