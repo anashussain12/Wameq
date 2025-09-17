@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { Poppins } from "next/font/google";
+import Link from "next/link";
 
 const poppins = Poppins({
   weight: ["400", "600", "700", "800"],
@@ -29,12 +30,12 @@ export default function Hero() {
 
           {/* Call-to-Action Buttons */}
           <div className="mt-8 flex flex-wrap gap-4">
-            <a
+            <Link
               href="#services"
               className="bg-black text-white  px-6 py-3 rounded-md font-semibold text-lg hover:bg-yellow-400 transition"
             >
               Get Started
-            </a>
+            </Link>
           </div>
         </div>
 

@@ -4,7 +4,6 @@ export default async function BlogPostPage({ params }) {
   // Fetch single article by slug
   const res = await fetch(
     `http://localhost:1337/api/articles?filters[slug][$eq]=${params.slug}&populate=*`,
-    { cache: "no-store" }
   );
   const { data } = await res.json();
 

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default async function BlogPage() {
   // const res = await fetch("http://localhost:1337/api/articles?populate=*");
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/articles?populate=*`);
@@ -65,12 +67,12 @@ export default async function BlogPage() {
                 </div>
 
                 {/* Read More */}
-                <a
+                <Link
                   href={`/blogpost/${article.slug}`}
                   className="mt-4 inline-block bg-gradient-to-r from-fuchsia-500 via-purple-500 to-indigo-500 text-white px-4 py-2 rounded-lg text-center hover:opacity-90 transition"
                 >
                   Read More
-                </a>
+                </Link>
               </div>
             </div>
           );

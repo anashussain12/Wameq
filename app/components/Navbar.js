@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Check, BarChart3, Megaphone, Rocket, LineChart, Users } from "lucide-react";
+import Link from "next/link";
 
 const Grad = ({ children }) => (
   <span className="bg-gradient-to-r from-fuchsia-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent">
@@ -56,8 +57,8 @@ export default function ServicesPage() {
           ))}
         </div>
         <div className="mt-8 flex flex-wrap gap-3">
-          <a href="#contact" className="rounded-xl bg-black px-5 py-3 text-sm font-bold text-white hover:bg-black/90">Book a Free Audit</a>
-          <a href="#services" className="rounded-xl border border-black/15 px-5 py-3 text-sm font-bold hover:bg-black/5">Explore Services</a>
+          <Link href="#contact" className="rounded-xl bg-black px-5 py-3 text-sm font-bold text-white hover:bg-black/90">Book Link Free Audit</Link>
+          <Link href="#services" className="rounded-xl border border-black/15 px-5 py-3 text-sm font-bold hover:bg-black/5">Explore Services</Link>
         </div>
       </section>
 
@@ -131,7 +132,7 @@ export default function ServicesPage() {
                   <li key={j} className="flex items-center gap-2"><Check className="h-4 w-4 text-fuchsia-500" /> {x}</li>
                 ))}
               </ul>
-              <a href="#contact" className="mt-6 inline-block rounded-xl bg-black px-5 py-3 text-sm font-bold text-white hover:bg-black/90">Choose</a>
+              <Link href="#contact" className="mt-6 inline-block rounded-xl bg-black px-5 py-3 text-sm font-bold text-white hover:bg-black/90">Choose</Link>
             </div>
           ))}
         </div>
@@ -160,17 +161,17 @@ export default function ServicesPage() {
         <h2 className="text-3xl font-extrabold sm:text-4xl">FAQs</h2>
         <div className="mt-6 divide-y divide-black/10 rounded-2xl border border-black/10 bg-white">
           {[
-            { q: "How do you start engagements?", a: "With a rapid audit + 90‑day plan covering tracking, structure, creative, and CRO priorities." },
-            { q: "What industries do you work with?", a: "Fintech, SaaS, E‑commerce, and education primarily." },
-            { q: "Do you offer one‑time projects?", a: "Yes—Starter Sprint is designed for that." },
-            { q: "Can you join stakeholder calls?", a: "Yes, weekly or bi‑weekly check‑ins are standard." }
+            { q: "How do you start engagements?", Link: "With Link rapid audit + 90‑day plan covering tracking, structure, creative, and CRO priorities." },
+            { q: "What industries do you work with?", Link: "Fintech, SaaS, E‑commerce, and education primarily." },
+            { q: "Do you offer one‑time projects?", Link: "Yes—Starter Sprint is designed for that." },
+            { q: "Can you join stakeholder calls?", Link: "Yes, weekly or bi‑weekly check‑ins are standard." }
           ].map((f, i) => (
             <details key={i} className="group px-6 py-5 open:bg-black/[0.02]">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-bold">
                 <span>{f.q}</span>
                 <span className="text-black/40 group-open:rotate-45">+</span>
               </summary>
-              <p className="mt-2 text-sm text-black/70">{f.a}</p>
+              <p className="mt-2 text-sm text-black/70">{f.Link}</p>
             </details>
           ))}
         </div>
@@ -180,8 +181,8 @@ export default function ServicesPage() {
       <section id="contact" className="mx-auto max-w-7xl px-4 pb-20 text-center sm:px-6 lg:px-8">
         <div className="rounded-3xl border border-black/10 bg-gradient-to-r from-fuchsia-50 to-indigo-50 p-10">
           <h2 className="text-2xl font-extrabold sm:text-3xl">Ready to Scale?</h2>
-          <p className="mt-2 text-black/70">Book a free consultation and let’s build your growth roadmap together.</p>
-          <a href="/contact" className="mt-6 inline-block rounded-xl bg-black px-6 py-3 font-bold text-white hover:bg-black/90">Book a Free Audit</a>
+          <p className="mt-2 text-black/70">Book Link free consultation and let’s build your growth roadmap together.</p>
+          <Link href="/contact" className="mt-6 inline-block rounded-xl bg-black px-6 py-3 font-bold text-white hover:bg-black/90">Book Link Free Audit</Link>
         </div>
       </section>
           

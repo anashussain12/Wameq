@@ -27,22 +27,22 @@ export default function DigitalMarketingConsultantSite() {
             <div>
               <h3 className="text-sm font-bold uppercase tracking-wide text-black/70">Services</h3>
               <ul className="mt-3 space-y-2 text-sm text-black/60">
-                <li><a href="#services" className="hover:text-black">Google Ads Management</a></li>
-                <li><a href="#services" className="hover:text-black">Meta & TikTok Ads</a></li>
-                <li><a href="#services" className="hover:text-black">SEO & Content</a></li>
-                <li><a href="#services" className="hover:text-black">Conversion Optimization</a></li>
+                <li><Link href="#services" className="hover:text-black">Google Ads Management</Link></li>
+                <li><Link href="#services" className="hover:text-black">Meta & TikTok Ads</Link></li>
+                <li><Link href="#services" className="hover:text-black">SEO & Content</Link></li>
+                <li><Link href="#services" className="hover:text-black">Conversion Optimization</Link></li>
               </ul>
             </div>
 
             <div>
               <h3 className="text-sm font-bold uppercase tracking-wide text-black/70">Locations</h3>
               <ul className="mt-3 space-y-2 text-sm text-black/60">
-                <li><a href="#" className="hover:text-black">Digital Marketing in Dubai</a></li>
-                <li><a href="#" className="hover:text-black">Digital Marketing in Sydney</a></li>
-                <li><a href="#" className="hover:text-black">Digital Marketing in Karachi</a></li>
-                <li><a href="#" className="hover:text-black">Digital Marketing in Lahore</a></li>
-                <li><a href="#" className="hover:text-black">Digital Marketing in London</a></li>
-                <li><a href="#" className="hover:text-black">Digital Marketing in New York</a></li>
+                <li><Link href="#" className="hover:text-black">Digital Marketing in Dubai</Link></li>
+                <li><Link href="#" className="hover:text-black">Digital Marketing in Sydney</Link></li>
+                <li><Link href="#" className="hover:text-black">Digital Marketing in Karachi</Link></li>
+                <li><Link href="#" className="hover:text-black">Digital Marketing in Lahore</Link></li>
+                <li><Link href="#" className="hover:text-black">Digital Marketing in London</Link></li>
+                <li><Link href="#" className="hover:text-black">Digital Marketing in New York</Link></li>
               </ul>
             </div>
 
@@ -50,10 +50,10 @@ export default function DigitalMarketingConsultantSite() {
               <h3 className="text-sm font-bold uppercase tracking-wide text-black/70">Quick Links</h3>
               <ul className="mt-3 space-y-2 text-sm text-black/60">
                 <li><Link href="/blog" className="hover:text-black">Blog</Link></li>
-                <li><a href="#resources" className="hover:text-black">Free Resources</a></li>
-                <li><a href="#community" className="hover:text-black">Community</a></li>
-                <li><a href="#faq" className="hover:text-black">FAQs</a></li>
-                <li><a href="#contact" className="hover:text-black">Contact</a></li>
+                <li><Link href="#resources" className="hover:text-black">Free Resources</Link></li>
+                <li><Link href="#community" className="hover:text-black">Community</Link></li>
+                <li><Link href="#faq" className="hover:text-black">FAQs</Link></li>
+                <li><Link href="#contact" className="hover:text-black">Contact</Link></li>
               </ul>
             </div>
           </div>
@@ -61,9 +61,9 @@ export default function DigitalMarketingConsultantSite() {
           <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-black/10 pt-6 text-sm text-black/60 sm:flex-row">
             <p>© {new Date().getFullYear()} Wameq — Digital Marketing Consultant</p>
             <div className="flex items-center gap-3">
-              <a href="#" className="hover:text-black">Privacy</a>
+              <Link href="#" className="hover:text-black">Privacy</Link>
               <span className="text-black/30">•</span>
-              <a href="#" className="hover:text-black">Terms</a>
+              <Link href="#" className="hover:text-black">Terms</Link>
             </div>
           </div>
         </div>
