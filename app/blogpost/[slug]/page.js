@@ -9,7 +9,7 @@ export default async function BlogPostPage({ params }) {
   }
 
   // Fetch single article by slug
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://enduring-chickens-9db6f070aa.strapiapp.com/admin";
   const res = await fetch(`${API_URL}/api/articles?filters[slug][$eq]=${slug}&populate=*`);
   const { data } = await res.json();
 

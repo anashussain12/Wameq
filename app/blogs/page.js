@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default async function BlogPage() {
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://enduring-chickens-9db6f070aa.strapiapp.com/admin";
 
   let data = [];
   try {
