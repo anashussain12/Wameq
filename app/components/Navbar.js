@@ -60,9 +60,7 @@ export default function ServicesPage() {
           <Link href="#contact" className="rounded-xl bg-black px-5 py-3 text-sm font-bold text-white hover:bg-black/90">Book Link Free Audit</Link>
           <Link href="#services" className="rounded-xl border border-black/15 px-5 py-3 text-sm font-bold hover:bg-black/5">Explore Services</Link>
         </div>
-      </section>
-
-      {/* SERVICES GRID */}
+      </section>]
       <section id="services" className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {[
@@ -114,8 +112,6 @@ export default function ServicesPage() {
           ))}
         </div>
       </section>
-
-      {/* PRICING */}
       <section id="pricing" className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-extrabold sm:text-4xl">Simple, Transparent <Grad>Packages</Grad></h2>
         <div className="mt-8 grid gap-6 md:grid-cols-3">
@@ -137,8 +133,6 @@ export default function ServicesPage() {
           ))}
         </div>
       </section>
-
-      {/* PROCESS */}
       <section id="process" className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-extrabold sm:text-4xl">Proven <Grad>Process</Grad></h2>
         <div className="mt-8 grid gap-6 md:grid-cols-3">
@@ -155,8 +149,6 @@ export default function ServicesPage() {
           ))}
         </div>
       </section>
-
-      {/* FAQ */}
       <section id="faq" className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-extrabold sm:text-4xl">FAQs</h2>
         <div className="mt-6 divide-y divide-black/10 rounded-2xl border border-black/10 bg-white">
