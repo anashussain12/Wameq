@@ -2,27 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default async function BlogPostPage({ params }) {
-    const slug = params.slug; // make sure slug exists
+  const slug = params?.slug; // optional chaining to avoid crash
 
-  // Fetch single article by slug
-  // const res = await fetch(
-  //   `http://localhost:1337/api/articles?filters[slug][$eq]=${params.slug}&populate=*`,
-  // );
-
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/articles?populate=*`);
-
-
-  const { data } = await res.json();
-
-  // If no article found
-  if (!data || data.length === 0) {
-    return (
-      <div className="text-center py-20 text-xl text-gray-600">
-        Article not found 😢
-      </div>
-    );
+  if (!slug) {
+    return <div className="text-center py-20">Slug not found 😢</div>;
   }
 
+  // Fetch single article by slug
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
+  const res = await fetch(`${API_URL}/api/articles?filters[slug][$eq]=${slug}&populate=*`);
+  const { data } = await res.json();
+
+  if (!data || data.length === 0) {
+    return <div className="text-center py-20">Article not found 😢</div>;
+  }
   const article = data[0];
   const { id, title, description, createdAt, author, cover, blocks } = article;
 
@@ -35,8 +28,8 @@ export default async function BlogPostPage({ params }) {
   //   "http://localhost:1337/api/articles?populate=*&pagination[pageSize]=6"
   // );
 
-  const relatedRes = await fetch(
-  `${process.env.NEXT_PUBLIC_API_URL}/api/articles?populate=*&pagination[pageSize]=6`
+const relatedRes = await fetch(
+  `${API_URL}/api/articles?populate=*&pagination[pageSize]=6`
 );
 
 
