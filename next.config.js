@@ -10,7 +10,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "my-strapi-app.onrender.com", // <-- replace with your deployed Strapi domain
+        hostname: "https://enduring-chickens-9db6f070aa.strapiapp.com", // <-- replace with your deployed Strapi domain
         pathname: "/uploads/**",
       },
     ],

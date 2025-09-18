@@ -1,6 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL; // ✅ define it here
+
+
 function renderRichText(content) {
   if (!content) return null;
 
@@ -21,9 +24,8 @@ function renderRichText(content) {
         return (
           <ListTag
             key={i}
-            className={`pl-6 mb-5 space-y-2 text-gray-700 ${
-              block.format === "unordered" ? "list-disc" : "list-decimal"
-            }`}
+            className={`pl-6 mb-5 space-y-2 text-gray-700 ${block.format === "unordered" ? "list-disc" : "list-decimal"
+              }`}
           >
             {block.children.map((li, j) => (
               <li key={j}>{li.children.map((c) => c.text)}</li>
@@ -38,7 +40,7 @@ function renderRichText(content) {
 
 export default async function BlogPostPage({ params }) {
   const res = await fetch(
-    `http://localhost:1337/api/articles?filters[slug][$eq]=${params.slug}&populate=image`,
+    `${API_URL}/api/articles?filters[slug][$eq]=${params.slug}&populate=image`,
     { cache: "no-store" }
   );
 
@@ -54,12 +56,12 @@ export default async function BlogPostPage({ params }) {
   const { id, title, description, content, image, author, createdAt } = article;
 
   const imageUrl = image?.url
-    ? `http://localhost:1337${image.url}`
+    ? `${API_URL}${image.url}`
     : "https://via.placeholder.com/1200x500.png?text=No+Image";
 
   // Fetch related blogs excluding current one
   const relatedRes = await fetch(
-    `http://localhost:1337/api/articles?filters[id][$ne]=${id}&pagination[limit]=3&populate=image`,
+    `${API_URL}/api/articles?filters[id][$ne]=${id}&pagination[limit]=3&populate=image`,
     { cache: "no-store" }
   );
   const relatedJson = await relatedRes.json();
@@ -102,9 +104,8 @@ export default async function BlogPostPage({ params }) {
             {relatedBlogs.map((blog) => {
               const { id, title, description, slug, image } = blog;
               const relatedImage = image?.url
-                ? `http://localhost:1337${image.url}`
+                ? `${API_URL}${image.url}`
                 : "https://via.placeholder.com/600x400.png?text=No+Image";
-
               return (
                 <Link
                   key={id}

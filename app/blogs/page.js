@@ -1,10 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL; // ✅ define it here
+
 export default async function BlogPage() {
-  const res = await fetch("http://localhost:1337/api/articles?populate=image", {
+  // Fetch all blogs (no slug here)
+  const res = await fetch(`${API_URL}/api/articles?populate=image`, {
     cache: "no-store",
   });
+
   const { data } = await res.json();
 
   return (
@@ -24,8 +28,8 @@ export default async function BlogPage() {
         {data.map((article) => {
           const { id, title, description, slug, image } = article;
           const imageUrl = image?.url
-            ? `http://localhost:1337${image.url}`
-            : "https://via.placeholder.com/600x400.png?text=No+Image";
+            ? `${API_URL}${image.url}`
+            : "https://via.placeholder.com/1200x500.png?text=No+Image";
 
           return (
             <Link
@@ -34,7 +38,7 @@ export default async function BlogPage() {
               className="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition duration-300 overflow-hidden flex flex-col"
             >
               {/* Image */}
-              <div className="relative w-full h-56">
+              <div className="relative h-56">
                 <Image
                   src={imageUrl}
                   alt={title}
