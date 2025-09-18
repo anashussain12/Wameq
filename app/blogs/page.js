@@ -1,5 +1,5 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function BlogPage() {
   const res = await fetch("http://localhost:1337/api/articles?populate=image", {
@@ -8,47 +8,48 @@ export default async function BlogPage() {
   const { data } = await res.json();
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-12">
-      <h1 className="text-4xl font-extrabold text-center mb-12">
-        Latest <span className="text-indigo-600">Blogs</span>
-      </h1>
+    <div className="max-w-7xl mx-auto px-6 py-16">
+      {/* Header */}
+      <div className="text-center mb-16">
+        <h1 className="text-5xl font-extrabold mb-4 bg-gradient-to-r from-indigo-600 via-purple-500 to-pink-500 bg-clip-text text-transparent ">
+          Our Latest Blogs
+        </h1>
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          Explore tutorials, insights, and stories crafted with care.
+        </p>
+      </div>
 
+      {/* Blog Grid */}
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
         {data.map((article) => {
-          const { title, description, slug, image } = article;
-
-          // Strapi image URL (with backend base URL)
+          const { id, title, description, slug, image } = article;
           const imageUrl = image?.url
             ? `http://localhost:1337${image.url}`
-            : null;
+            : "https://via.placeholder.com/600x400.png?text=No+Image";
 
           return (
             <Link
-              key={slug}
+              key={id}
               href={`/blogpost/${slug}`}
-              className="group block rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 bg-white"
+              className="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition duration-300 overflow-hidden flex flex-col"
             >
-              {/* Show image if exists */}
-              {imageUrl ? (
+              {/* Image */}
+              <div className="relative w-full h-56">
                 <Image
                   src={imageUrl}
                   alt={title}
-                  width={500}
-                  height={300}
-                  className="w-full h-48 object-cover"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-              ) : (
-                <div className="h-48 bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-white text-xl font-bold">
-                  {title.charAt(0)}
-                </div>
-              )}
+              </div>
 
-              <div className="p-6">
+              {/* Content */}
+              <div className="p-6 flex flex-col flex-grow">
                 <h2 className="text-2xl font-semibold mb-2 group-hover:text-indigo-600 transition">
                   {title}
                 </h2>
-                <p className="text-gray-600 line-clamp-3">{description}</p>
-                <span className="mt-4 inline-block text-indigo-600 font-medium">
+                <p className="text-gray-600 flex-grow line-clamp-3">{description}</p>
+                <span className="mt-4 inline-block text-indigo-600 font-medium group-hover:underline">
                   Read More →
                 </span>
               </div>
