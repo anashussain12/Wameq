@@ -21,8 +21,9 @@ function renderRichText(content) {
         return (
           <ListTag
             key={i}
-            className={`pl-6 mb-5 space-y-2 text-gray-700 ${block.format === "unordered" ? "list-disc" : "list-decimal"
-              }`}
+            className={`pl-6 mb-5 space-y-2 text-gray-700 ${
+              block.format === "unordered" ? "list-disc" : "list-decimal"
+            }`}
           >
             {block.children.map((li, j) => (
               <li key={j}>{li.children.map((c) => c.text)}</li>
@@ -36,30 +37,33 @@ function renderRichText(content) {
 }
 
 export default async function BlogPostPage({ params }) {
-  // Fetch current blog
   const res = await fetch(
     `http://localhost:1337/api/articles?filters[slug][$eq]=${params.slug}&populate=image`,
     { cache: "no-store" }
   );
-  const { data } = await res.json();
-  const article = data[0];
 
-  if (!article) {
+  const json = await res.json();
+  const data = json.data || [];
+
+  // Safely get the first article
+  if (!data || data.length === 0) {
     return <p className="text-center text-gray-500 py-20">Blog not found.</p>;
   }
 
+  const article = data[0]; // safe now
   const { id, title, description, content, image, author, createdAt } = article;
+
   const imageUrl = image?.url
     ? `http://localhost:1337${image.url}`
     : "https://via.placeholder.com/1200x500.png?text=No+Image";
 
-  // Fetch related blogs (excluding current one)
+  // Fetch related blogs excluding current one
   const relatedRes = await fetch(
     `http://localhost:1337/api/articles?filters[id][$ne]=${id}&pagination[limit]=3&populate=image`,
     { cache: "no-store" }
   );
   const relatedJson = await relatedRes.json();
-  const relatedBlogs = relatedJson.data;
+  const relatedBlogs = relatedJson.data || [];
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-16">
@@ -72,8 +76,8 @@ export default async function BlogPostPage({ params }) {
       <h1 className="text-4xl font-extrabold mb-4 text-gray-900">{title}</h1>
       <p className="text-lg text-gray-600 mb-6">{description}</p>
 
-      <div className="flex items-center justify-between mb-6 text-sm text-gray-500">
-        {/* <span>✍️ {author || "Anonymous"}</span> */}
+      <div className="flex items-center justify-between mb-12 text-sm text-gray-500">
+        <span>✍️ {author || "Anonymous"}</span>
         <span>
           {new Date(createdAt).toLocaleDateString("en-US", {
             year: "numeric",

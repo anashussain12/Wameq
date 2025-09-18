@@ -1,20 +1,8 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        protocol: "http",
-        hostname: "localhost",
-        port: "1337", // important for local dev
-        pathname: "/uploads/**",
-      },
-      {
-        protocol: "https",
-        hostname: "my-strapi-app.onrender.com", // <-- replace with your deployed Strapi domain
-        pathname: "/uploads/**",
-      },
-    ],
-  },
-};
+// /** @type {import('next').NextConfig} */
+// const nextConfig = {
+//   images: {
+//     domains: ["enduring-chickens-9db6f070aa.strapiapp.com", "via.placeholder.com"],
+//   },
+// };
 
-module.exports = nextConfig;
+// module.exports = nextConfig;
