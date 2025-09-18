@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL; // ✅ define it here
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 
 function renderRichText(content) {
@@ -46,8 +46,6 @@ export default async function BlogPostPage({ params }) {
 
   const json = await res.json();
   const data = json.data || [];
-
-  // Safely get the first article
   if (!data || data.length === 0) {
     return <p className="text-center text-gray-500 py-20">Blog not found.</p>;
   }
