@@ -5,22 +5,21 @@ export default async function BlogPage() {
   const res = await fetch("http://localhost:1337/api/articles?populate=image", {
     cache: "no-store",
   });
-
-  const json = await res.json();
-  const data = json.data || []; // <-- fallback to empty array
-
-  if (!data || data.length === 0) {
-    return (
-      <p className="text-center text-gray-500 py-20">No articles found.</p>
-    );
-  }
+  const { data } = await res.json();
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-16">
-      <h1 className="text-4xl font-extrabold text-center mb-12">
-        Latest <span className="text-indigo-600">Blogs</span>
-      </h1>
+      {/* Header */}
+      <div className="text-center mb-16">
+        <h1 className="text-5xl font-extrabold mb-4 bg-gradient-to-r from-indigo-600 via-purple-500 to-pink-500 bg-clip-text text-transparent ">
+          Our Latest Blogs
+        </h1>
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          Explore tutorials, insights, and stories crafted with care.
+        </p>
+      </div>
 
+      {/* Blog Grid */}
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
         {data.map((article) => {
           const { id, title, description, slug, image } = article;
@@ -32,9 +31,10 @@ export default async function BlogPage() {
             <Link
               key={id}
               href={`/blogpost/${slug}`}
-              className="group bg-white rounded-2xl shadow hover:shadow-xl transition overflow-hidden flex flex-col"
+              className="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition duration-300 overflow-hidden flex flex-col"
             >
-              <div className="relative w-full h-44">
+              {/* Image */}
+              <div className="relative w-full h-56">
                 <Image
                   src={imageUrl}
                   alt={title}
@@ -42,11 +42,16 @@ export default async function BlogPage() {
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <div className="p-5 flex flex-col flex-grow">
-                <h3 className="text-lg font-semibold mb-2 group-hover:text-indigo-600 transition">
+
+              {/* Content */}
+              <div className="p-6 flex flex-col flex-grow">
+                <h2 className="text-2xl font-semibold mb-2 group-hover:text-indigo-600 transition">
                   {title}
-                </h3>
-                <p className="text-gray-600 line-clamp-3">{description}</p>
+                </h2>
+                <p className="text-gray-600 flex-grow line-clamp-3">{description}</p>
+                <span className="mt-4 inline-block text-indigo-600 font-medium group-hover:underline">
+                  Read More →
+                </span>
               </div>
             </Link>
           );
