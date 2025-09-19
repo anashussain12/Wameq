@@ -1,17 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL; // ✅ define it here
-const TOKEN = process.env.STRAPI_API_TOKEN;
-
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default async function BlogPage() {
   const res = await fetch(`${API_URL}/api/articles?populate=image`, {
-    headers: {
-      Authorization: `Bearer ${TOKEN}`, // ✅ Use API token
-    },
     cache: "no-store",
   });
+
+  if (!res.ok) {
+    console.error("Failed to fetch blogs:", res.statusText);
+    return <p>Error loading blogs.</p>;
+  }
 
   const { data } = await res.json();
 
@@ -19,7 +19,7 @@ export default async function BlogPage() {
     <div className="max-w-7xl mx-auto px-6 py-16">
       {/* Header */}
       <div className="text-center mb-16">
-        <h1 className="text-5xl font-extrabold mb-4 bg-gradient-to-r from-indigo-600 via-purple-500 to-pink-500 bg-clip-text text-transparent ">
+        <h1 className="text-5xl font-extrabold mb-4 bg-gradient-to-r from-indigo-600 via-purple-500 to-pink-500 bg-clip-text text-transparent">
           Our Latest Blogs
         </h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -29,7 +29,6 @@ export default async function BlogPage() {
 
       {/* Blog Grid */}
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-
         {data?.map((article) => {
           const { id, attributes } = article;
           const { title, description, slug, image } = attributes;
@@ -59,7 +58,9 @@ export default async function BlogPage() {
                 <h2 className="text-2xl font-semibold mb-2 group-hover:text-indigo-600 transition">
                   {title}
                 </h2>
-                <p className="text-gray-600 flex-grow line-clamp-3">{description}</p>
+                <p className="text-gray-600 flex-grow line-clamp-3">
+                  {description}
+                </p>
                 <span className="mt-4 inline-block text-indigo-600 font-medium group-hover:underline">
                   Read More →
                 </span>
@@ -67,8 +68,6 @@ export default async function BlogPage() {
             </Link>
           );
         })}
-
-
       </div>
     </div>
   );
