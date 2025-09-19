@@ -2,10 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL; // ✅ define it here
+const TOKEN = process.env.STRAPI_API_TOKEN;
+
 
 export default async function BlogPage() {
-  // Fetch all blogs (no slug here)
   const res = await fetch(`${API_URL}/api/articles?populate=image`, {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`, // ✅ Use API token
+    },
     cache: "no-store",
   });
 
@@ -25,10 +29,13 @@ export default async function BlogPage() {
 
       {/* Blog Grid */}
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-        {data.map((article) => {
-          const { id, title, description, slug, image } = article;
-          const imageUrl = image?.url
-            ? `${API_URL}${image.url}`
+
+        {data?.map((article) => {
+          const { id, attributes } = article;
+          const { title, description, slug, image } = attributes;
+
+          const imageUrl = image?.data?.attributes?.url
+            ? `${API_URL}${image.data.attributes.url}`
             : "https://via.placeholder.com/1200x500.png?text=No+Image";
 
           return (
@@ -60,6 +67,8 @@ export default async function BlogPage() {
             </Link>
           );
         })}
+
+
       </div>
     </div>
   );
