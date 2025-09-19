@@ -1,19 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
 export default async function BlogPage() {
-  const res = await fetch(`${API_URL}/api/articles?populate=image`, {
-    cache: "no-store",
-  });
+  const res = await fetch(
+    "https://determined-success-d23d66e1df.strapiapp.com/api/articles?populate=*",
+    { cache: "no-store" }
+  );
 
   if (!res.ok) {
-    console.error("Failed to fetch blogs:", res.statusText);
-    return <p>Error loading blogs.</p>;
+    return <p className="text-center text-red-500">Failed to load blogs.</p>;
   }
 
   const { data } = await res.json();
+
+  if (!data || data.length === 0) {
+    return <p className="text-center text-gray-500">No blogs found.</p>;
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-16">
@@ -23,18 +25,17 @@ export default async function BlogPage() {
           Our Latest Blogs
         </h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          Explore tutorials, insights, and stories crafted with care.
+          Insights, tutorials, and stories crafted with care.
         </p>
       </div>
 
       {/* Blog Grid */}
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-        {data?.map((article) => {
-          const { id, attributes } = article;
-          const { title, description, slug, image } = attributes;
+        {data.map((article) => {
+          const { id, title, description, slug, image, author } = article;
 
-          const imageUrl = image?.data?.attributes?.url
-            ? `${API_URL}${image.data.attributes.url}`
+          const imageUrl = image?.url
+            ? image.url
             : "https://via.placeholder.com/1200x500.png?text=No+Image";
 
           return (
@@ -58,9 +59,8 @@ export default async function BlogPage() {
                 <h2 className="text-2xl font-semibold mb-2 group-hover:text-indigo-600 transition">
                   {title}
                 </h2>
-                <p className="text-gray-600 flex-grow line-clamp-3">
-                  {description}
-                </p>
+                <p className="text-gray-600 flex-grow line-clamp-3">{description}</p>
+                <p className="text-sm text-gray-500 mt-2">By {author || "Unknown"}</p>
                 <span className="mt-4 inline-block text-indigo-600 font-medium group-hover:underline">
                   Read More →
                 </span>
