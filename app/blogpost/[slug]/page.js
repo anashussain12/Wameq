@@ -3,8 +3,6 @@ import Image from "next/image";
 import React from "react";
 
 const API_URL = process.env.NEXT_PUBLIC_STRAPI_API_URL;
-
-// Helper to render rich content from Strapi
 const renderContent = (content) => {
   if (!content) return null;
 
