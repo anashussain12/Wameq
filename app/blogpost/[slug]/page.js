@@ -2,6 +2,8 @@
 import Image from "next/image";
 import React from "react";
 
+const API_URL = process.env.NEXT_PUBLIC_STRAPI_API_URL;
+
 // Helper to render rich content from Strapi
 const renderContent = (content) => {
   if (!content) return null;
@@ -65,7 +67,7 @@ export default async function BlogPostPage({ params }) {
   const { slug } = params;
 
   const res = await fetch(
-    `https://determined-success-d23d66e1df.strapiapp.com/api/articles?filters[slug][$eq]=${slug}&populate=*`,
+    `${API_URL}/api/articles?filters[slug][$eq]=${slug}&populate=*`,
     { cache: "no-store" }
   );
 

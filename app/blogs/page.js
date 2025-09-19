@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 
+const API_URL = process.env.NEXT_PUBLIC_STRAPI_API_URL;
+
 export default async function BlogPage() {
-  const res = await fetch(
-    "https://determined-success-d23d66e1df.strapiapp.com/api/articles?populate=*",
-    { cache: "no-store" }
-  );
+  const res = await fetch(`${API_URL}/api/articles?populate=*`, {
+    cache: "no-store",
+  });
 
   if (!res.ok) {
     return <p className="text-center text-red-500">Failed to load blogs.</p>;
